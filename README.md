@@ -1,1 +1,2 @@
-# INGCOM-IC-2025.
+Nombre: Tomas Bizzarri
+Alias en GitHub: Thrust56
