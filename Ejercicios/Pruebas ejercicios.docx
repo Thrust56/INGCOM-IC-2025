@@ -1,9 +1,0 @@
-Ejercicio "Fibonacci"
-Tiene como objetivo calcular la suscecion Fibonacci.
-
-Pruebas de caja blanca:
-    - Su complejidad ciclomatica es de 1
-
-Pruebas de caja negra:
-    Particion de equivalencia
-    clases validas: 
