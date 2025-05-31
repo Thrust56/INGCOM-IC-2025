@@ -1,5 +1,5 @@
 #Nombre de la empresa: 2000 Automoviles
-#Lista de autos: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+#Lista de autos: n autos
 #Datos a ingresar: DNI (o pasaporte), Nombre, Apellido, Domicilio, empresa, telefono laboral, domicilio laboral,
 #Local, turista nacional, turista internacional, referencia para el hotel o agencia asociada, VIP.
 #Datos del vehiculo: Modelo, numero de chasis, motor, tipo de vehiculo (camioneta, auto 4p, convertible, etc.)
@@ -12,14 +12,85 @@
 #Se cobra un seguro brindado por la comision nacional de seguro. Se registra codigo, nombre e importe.
 #El importe no varia segun el vehiculo. Se agrega un seguro especial para rutas de tierra y danos por nieve.
 
-#Proceso de alquiler: El cliente solicita un modelo de vehiculo y se verifica disponibilidad. Si hay vehiculo, se asigna y se.
+#Proceso de alquiler: El cliente solicita un modelo de vehiculo y se verifica disponibilidad. Si hay vehiculo, se asigna y se
 #piden los datos. Si no, se regista el motivo de rechazo. Se debe validar que el solicitante sea mayor de 25 anos, que tenga
 #licencia de conducir habilitada, y en caso de ser extranjero que posea licencia internacional para turistas.
 
 #Una vez cumplidos los requisitos se genera factura, por alquiler, datos del cliente, vehiculo, tarifa, seguros, periodo de
-#alquiler, regargos por temporada y zona, descuento VIP si corresponde. El encargado de la playa registra la devolucion, 
+#alquiler, recargos por temporada y zona, descuento VIP si corresponde. El encargado de la playa registra la devolucion, 
 #se envia copia de la factura al cliente y se archiva otra.
 
 #El cliente puede pagar de forma parcial o total. Cada pago se registra con DNI, fecha, numero de factura, importe abonado y
 #saldo pendiente. No se aceptan pagos mayores a la deuda.
 
+"""Diagrama de flujo
+
+Vehiculos = {modelo: num_chasis}
+Vehiculos2 = {modelo: motor}
+Vehiculos3 {modelo: tipo_vehiculo}
+
+Ingresar fecha actual
+Imprimir Vehiculos
+Ingresar modelo de vehiculo
+si modelo de vehiculo no tiene disponibilidad:
+    rechazar pedido y explicar motivo
+sino:
+    pedir edad
+    pedir vencimiento de licencia de conducir
+        si edad < 25 o vencimiento_lc => 5 años:
+            rechazar pedido y explicar motivo
+    pedir_datos()
+
+pedir_datos():
+    ingresar DNI o pasaporte, Nombre, Apellido, Domicilio, empresa, telefono laboral, domicilio laboral,
+    si Local turista nacional o turista internacional, referencia para el hotel o agencia asociada, VIP.
+
+calcular_tarifa():
+    ingresar tiempo_estadia (1, 2, 3, 4)
+    Si tiempo_estadia == diaria
+    Sino si tiempo_estadia == fin de semana
+    Sino si tiempo_estadia == semana
+    Sino si tiempo_estadia == mes o sup
+    
+    Si el cliente es de bari:
+        diaria + bari
+        fin de semana + bari
+        semana + bari
+        mes o sup + bari
+    Sino:
+        diaria
+        fin de semana
+        semana
+        mes o sup
+    si es temporada:
+        tarifa + temporada
+
+forma_pago():
+    ingresar forma_pago
+    
+    si forma_pago == total:
+        imprimir tarifa
+        ingresar pago
+        
+    sino si pago == parcial:
+        ingresar cuotas 3, 6, 12
+        si cuotas == 3:
+            tarifa += 5%
+        sino si cuotas == 6:
+            tarifa += 10%
+        sino si cuotas == 12:
+            tarifa += 15%
+    
+    si VIP == True:
+        tarifa -= 20%
+        
+    imprimir tarifa
+            
+    mientras pago > tarifa
+        ingresar pago
+        imprimir "no se aceptan pagos mayores a la deuda"
+        
+    generar_factura():
+    imprimir datos_cliente, datos_vehiculo, tarifa, seguros, periodo_alquiler, recargos_temporada_zona, desc_VIP
+    
+"""
