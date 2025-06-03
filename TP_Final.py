@@ -29,7 +29,7 @@ Vehiculos = {modelo: num_chasis}
 Vehiculos2 = {modelo: motor}
 Vehiculos3 {modelo: tipo_vehiculo}
 
-Ingresar fecha actual
+Ingresar año actual
 Imprimir Vehiculos
 Ingresar modelo de vehiculo
 si modelo de vehiculo no tiene disponibilidad:
@@ -37,31 +37,26 @@ si modelo de vehiculo no tiene disponibilidad:
 sino:
     pedir edad
     pedir vencimiento de licencia de conducir
-        si edad < 25 o vencimiento_lc => 5 años:
+        si edad < 25 o vencimiento_lc == año actual:
             rechazar pedido y explicar motivo
     pedir_datos()
 
 pedir_datos():
     ingresar DNI o pasaporte, Nombre, Apellido, Domicilio, empresa, telefono laboral, domicilio laboral,
-    si Local turista nacional o turista internacional, referencia para el hotel o agencia asociada, VIP.
+    si es Local turista nacional o turista internacional, referencia para el hotel o agencia asociada, VIP.
 
 calcular_tarifa():
-    ingresar tiempo_estadia (1, 2, 3, 4)
-    Si tiempo_estadia == diaria
-    Sino si tiempo_estadia == fin de semana
-    Sino si tiempo_estadia == semana
-    Sino si tiempo_estadia == mes o sup
+    Segun sea tiempo_estadia (1, 2, 3, 4)
+        Caso 1: diaria
+        Caso 2: fin de semana
+        Caso 3: semana
+        Caso 4: mes o sup
     
     Si el cliente es de bari:
-        diaria + bari
-        fin de semana + bari
-        semana + bari
-        mes o sup + bari
+        ingresar preguntar_de_que_zona_es
+        tarifa = tiempo_estadia + zona
     Sino:
-        diaria
-        fin de semana
-        semana
-        mes o sup
+        tarifa = tiempo_estadia
     si es temporada:
         tarifa + temporada
 
