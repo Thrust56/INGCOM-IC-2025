@@ -89,3 +89,45 @@ forma_pago():
     imprimir datos_cliente, datos_vehiculo, tarifa, seguros, periodo_alquiler, recargos_temporada_zona, desc_VIP
     
 """
+
+edad = int(input("Ingrese su edad: "))
+año_actual = int(input("Ingrese el año actual"))
+venc_lic = int(input("Ingrese la fecha de vencimiento de su licencia de conducir: "))
+vehiculos = {"Nissan Versa": "ABC123", "Jeep Wrangler": "SDF295", "Ford Hilux" : "NVI285", "Volkswagen Gol" : "NPH954"}
+
+while True:
+    if edad < 25:
+        print("Usted no es mayor de 25 años, su solicitud ha sido rechazada.")
+        break
+    elif venc_lic == año_actual:
+        print("Su licencia de conducir ha caducado, su solicitud ha sido rechazada.")
+        break
+
+    nombre = input("Ingrese su nombre: ")
+    apellido = input("Ingrese su apellido")
+    dni = input("Ingrese su DNI o numero de pasaporte")
+    domicilio = input("Ingrese su domicilio")
+    empresa = input("Ingrese la empresa en la que trabaja: ")
+    cel = input("Ingrese su número de telefono: ")
+    
+    vip = int(input("Si usted es VIP, ingrese su credencial. De lo contrario, ingrese un 0: "))
+    
+    forma_pago = input("Usted va a pagar con efectivo o crédito?: ").lower()
+    if forma_pago is not "efectivo" or "credito":
+        forma_pago = input("Usted va a pagar con efectivo o crédito?: ").lower()
+        continue
+    
+    bari = input("Es usted de bariloche?: ").lower()
+    if bari is not "si" or "no":
+        bari = input("Es usted de bariloche?: ").lower()
+        continue
+
+    if bari == "si":
+        print(f"Los vehiculos disponibles son:\n{vehiculos[2]}, {vehiculos.keys[2]}\n{vehiculos[3]}, {vehiculos.keys[3]}")
+    else:
+        print(f"Los vehiculos disponibles son:\n{vehiculos[0]}, {vehiculos.keys[0]}\n{vehiculos[1]},{vehiculos.keys[1]}\n{vehiculos[2]}, {vehiculos.keys[2]}\n{vehiculos[3]}, {vehiculos.keys[3]}")
+
+    temp_alta = input("Es temporada alta?: ")
+    if temp_alta is not "si" or "no":
+        bari = input("Es temporada alta?: ").lower()
+        continue
