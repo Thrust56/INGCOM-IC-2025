@@ -94,6 +94,8 @@ edad = int(input("Ingrese su edad: "))
 año_actual = int(input("Ingrese el año actual"))
 venc_lic = int(input("Ingrese la fecha de vencimiento de su licencia de conducir: "))
 vehiculos = {"Nissan Versa": "ABC123", "Jeep Wrangler": "SDF295", "Ford Hilux" : "NVI285", "Volkswagen Gol" : "NPH954"}
+tarifa = 0
+tarifa_final = 0
 
 while True:
     if edad < 25:
@@ -110,24 +112,35 @@ while True:
     empresa = input("Ingrese la empresa en la que trabaja: ")
     cel = input("Ingrese su número de telefono: ")
     
+    forma_pago = input("Usted va a pagar con efectivo o crédito (efectivo-crédito?): ").lower()
+    if forma_pago is not "efectivo" or "credito":
+        forma_pago = input("Usted va a pagar con efectivo o crédito? (efectivo-crédito?): ").lower()
+        continue
+    if forma_pago == "credito":
+        tarifa_final += 30
+    
     vip = int(input("Si usted es VIP, ingrese su credencial. De lo contrario, ingrese un 0: "))
     
-    forma_pago = input("Usted va a pagar con efectivo o crédito?: ").lower()
-    if forma_pago is not "efectivo" or "credito":
-        forma_pago = input("Usted va a pagar con efectivo o crédito?: ").lower()
-        continue
-    
-    bari = input("Es usted de bariloche?: ").lower()
+    bari = input("Es usted de bariloche?(si-no): ").lower()
     if bari is not "si" or "no":
-        bari = input("Es usted de bariloche?: ").lower()
+        bari = input("Es usted de bariloche(si-no)?: ").lower()
         continue
 
     if bari == "si":
-        print(f"Los vehiculos disponibles son:\n{vehiculos[2]}, {vehiculos.keys[2]}\n{vehiculos[3]}, {vehiculos.keys[3]}")
+        print(f"Los vehiculos disponibles son:\n3:{vehiculos[2]}, {vehiculos.keys[2]}\n4:{vehiculos[3]}, {vehiculos.keys[3]}")
     else:
-        print(f"Los vehiculos disponibles son:\n{vehiculos[0]}, {vehiculos.keys[0]}\n{vehiculos[1]},{vehiculos.keys[1]}\n{vehiculos[2]}, {vehiculos.keys[2]}\n{vehiculos[3]}, {vehiculos.keys[3]}")
-
-    temp_alta = input("Es temporada alta?: ")
-    if temp_alta is not "si" or "no":
-        bari = input("Es temporada alta?: ").lower()
-        continue
+        print(f"Los vehiculos disponibles son:\n1:{vehiculos[0]}, {vehiculos.keys[0]}\n2:{vehiculos[1]},{vehiculos.keys[1]}\n3:{vehiculos[2]}, {vehiculos.keys[2]}\n4:{vehiculos[3]}, {vehiculos.keys[3]}")
+        elegir_vehiculo = int(input("Elija un auto de los presentados anteriormente (1-2-3-4): "))
+        vehiculo_elegido = vehiculos[elegir_vehiculo]
+        patente_vehiculo_elegido = vehiculos.keys[elegir_vehiculo]
+        tarifa += 400000
+        
+        temp_alta = input("Es temporada alta? (si-no): ")
+        if temp_alta is not "si" or "no":
+                temp_alta = input("Es temporada alta? (si-no): ").lower()
+                continue
+        if temp_alta == "si":
+            tarifa_final += 20
+        
+        zona_geo = input("Indique si va a manejar por los siguientes lugares\n1: Circuito Chico\n2: Cerro catedral\n3: Ruta 40\n ")
+        tarifa_final += 10
