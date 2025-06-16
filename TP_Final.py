@@ -1,96 +1,4 @@
-#Nombre de la empresa: 2000 Automoviles
-#Lista de autos: n autos
-#Datos a ingresar: DNI (o pasaporte), Nombre, Apellido, Domicilio, empresa, telefono laboral, domicilio laboral,
-#Local, turista nacional, turista internacional, referencia para el hotel o agencia asociada, VIP.
-#Datos del vehiculo: Modelo, numero de chasis, motor, tipo de vehiculo (camioneta, auto 4p, convertible, etc.)
-#Atributos incorporados a Bariloche: 4x4(booleano, obligatorio p/ terreno montanoso y ripio),
-#equipamiento para nieve(cadenas, neumaticos especiales), permiso municipal(codigo de calcomania habilitante emitido por la muni)
-#Tarifas de alquiler(codigo y nombre): diaria, fin de semana, semana, mes o superior
-#Tarifas de temporada: Temporada alta (Junio a Septiembre(invierno), Diciembre a febrero(verano))
-#Tarifas por zona: Circuito chico, Cerro catedral, Ruta 40
-#Recargos segun temporada y zona.
-#Se cobra un seguro brindado por la comision nacional de seguro. Se registra codigo, nombre e importe.
-#El importe no varia segun el vehiculo. Se agrega un seguro especial para rutas de tierra y danos por nieve.
-
-#Proceso de alquiler: El cliente solicita un modelo de vehiculo y se verifica disponibilidad. Si hay vehiculo, se asigna y se
-#piden los datos. Si no, se regista el motivo de rechazo. Se debe validar que el solicitante sea mayor de 25 anos, que tenga
-#licencia de conducir habilitada, y en caso de ser extranjero que posea licencia internacional para turistas.
-
-#Una vez cumplidos los requisitos se genera factura, por alquiler, datos del cliente, vehiculo, tarifa, seguros, periodo de
-#alquiler, recargos por temporada y zona, descuento VIP si corresponde. El encargado de la playa registra la devolucion, 
-#se envia copia de la factura al cliente y se archiva otra.
-
-#El cliente puede pagar de forma parcial o total. Cada pago se registra con DNI, fecha, numero de factura, importe abonado y
-#saldo pendiente. No se aceptan pagos mayores a la deuda.
-
-"""Diagrama de flujo
-
-Vehiculos = {modelo: num_chasis}
-Vehiculos2 = {modelo: motor}
-Vehiculos3 {modelo: tipo_vehiculo}
-
-Ingresar año actual
-Imprimir Vehiculos
-Ingresar modelo de vehiculo
-si modelo de vehiculo no tiene disponibilidad:
-    rechazar pedido y explicar motivo
-sino:
-    pedir edad
-    pedir vencimiento de licencia de conducir
-        si edad < 25 o vencimiento_lc == año actual:
-            rechazar pedido y explicar motivo
-    pedir_datos()
-
-pedir_datos():
-    ingresar DNI o pasaporte, Nombre, Apellido, Domicilio, empresa, telefono laboral, domicilio laboral,
-    si es Local turista nacional o turista internacional, referencia para el hotel o agencia asociada, VIP.
-
-calcular_tarifa():
-    Segun sea tiempo_estadia (1, 2, 3, 4)
-        Caso 1: diaria
-        Caso 2: fin de semana
-        Caso 3: semana
-        Caso 4: mes o sup
-    
-    Si el cliente es de bari:
-        ingresar preguntar_de_que_zona_es
-        tarifa = tiempo_estadia + zona
-    Sino:
-        tarifa = tiempo_estadia
-    si es temporada:
-        tarifa + temporada
-
-forma_pago():
-    ingresar forma_pago
-    
-    si forma_pago == total:
-        imprimir tarifa
-        ingresar pago
-        
-    sino si pago == parcial:
-        ingresar cuotas 3, 6, 12
-        si cuotas == 3:
-            tarifa += 5%
-        sino si cuotas == 6:
-            tarifa += 10%
-        sino si cuotas == 12:
-            tarifa += 15%
-    
-    si VIP == True:
-        tarifa -= 20%
-        
-    imprimir tarifa
-            
-    mientras pago > tarifa
-        ingresar pago
-        imprimir "no se aceptan pagos mayores a la deuda"
-        
-    generar_factura():
-    imprimir datos_cliente, datos_vehiculo, tarifa, seguros, periodo_alquiler, recargos_temporada_zona, desc_VIP
-    
-"""
-
-edad = int(input("Ingrese su edad: "))
+"""edad = int(input("Ingrese su edad: "))
 año_actual = int(input("Ingrese el año actual"))
 venc_lic = int(input("Ingrese la fecha de vencimiento de su licencia de conducir: "))
 vehiculos = {"Nissan Versa": "ABC123", "Jeep Wrangler": "SDF295", "Ford Hilux" : "NVI285", "Volkswagen Gol" : "NPH954"}
@@ -143,4 +51,124 @@ while True:
             tarifa_final += 20
         
         zona_geo = input("Indique si va a manejar por los siguientes lugares\n1: Circuito Chico\n2: Cerro catedral\n3: Ruta 40\n ")
-        tarifa_final += 10
+        tarifa_final += 10"""
+        
+        
+#Declaracion de variables
+año_actual = int(input("Ingrese el año actual: "))
+tarifa = 20000 #Seguro inicial
+
+#Pregunta si hay vehiculos disponibles
+veh_disp = input("Hay vehiculo disponible? (si-no): ").lower()
+if veh_disp == "si":
+    #Toma los datos del cliente
+    def datos_cliente():
+        edad = int(input("Ingrese su edad: "))
+        nombre = input("Ingrese su nombre: ")
+        apellido = input("Ingrese su apellido: ")
+        dni = int(input("Ingrese su DNI o numero de pasaporte: "))
+        domicilio = input("Ingrese su domicilio: ")
+        empresa = input("Ingrese la empresa en la que trabaja: ")
+        cel = int(input("Ingrese su número de telefono: "))
+        venc_lic = int(input("Ingrese la fecha de vencimiento de su licencia de conducir: "))
+        #Pregunta si es turista y pide un hotel de referencia
+        turista = input("Es usted turista? (si-no): ").lower()
+        hotel = None
+        if turista == "si":
+            hotel = input("Ingrese un hotel de referencia: ")
+        #Pregunta si es VIP y aplica un descuento
+        vip = input("Es usted VIP? (si-no): ").lower()
+        desc_vip = 0
+        if vip == "si":
+            desc_vip = 0.15
+        #Pregunta la forma de pago
+        forma_pago = input("Usted pagará en crédito o efectivo?: ")
+            
+        return edad, nombre, apellido, dni, domicilio, empresa, cel, turista, hotel, desc_vip, forma_pago, venc_lic
+
+    edad, nombre, apellido, dni, domicilio, empresa, cel, turista, hotel, desc_vip, forma_pago, venc_lic = datos_cliente()
+    #Verifica que sea mayor de 25 y que tenga licencia válida
+    if edad >= 25:
+        if venc_lic >= año_actual:
+            #Verifica que sea de Bariloche
+            bari = input("Es la solicitud para Bariloche? (si-no): ").lower()
+            if bari == "si":
+                
+                def mod_bariloche():
+                    tarifa_1 = 0
+                    #Agrega tarifas para vehiculos 4x4 y equipo de nieve
+                    cuatroxcuatro = input("Usted utilizara un vehículo 4x4? (si-no): ").lower()
+                    if cuatroxcuatro == "si":
+                        tarifa_1 = tarifa_1 + 20000
+                    equip_invierno = input("Usted necesitara equipo de invierno? (si-no): ").lower()
+                    if equip_invierno == "si":
+                        tarifa_1 = tarifa_1 + 20000
+                    #Registra el modelo y la patente del vehiculo a utilizar
+                    modelo_veh = input("Ingrese el modelo del vehiculo: ")
+                    patente_veh = input("Ingrese la patente del vehiculo: ")
+                    #Pregunta si va a andar por estas zonas geograficas y aplica tarifas
+                    zona_geo = "a"
+                    while zona_geo != "s":
+                        zona_geo = input("Ingrese una de las siguientes zonas:\nCircuito Chico\nCerro Catedral\nRuta 40\nO ingrese 'S' para salir: ").lower()
+                        if zona_geo == "circuito chico":
+                            tarifa =+ 20000
+                        elif zona_geo == "cerro catedral":
+                            tarifa_1 = tarifa_1 + 20000
+                        elif zona_geo == "ruta 40": #Podria agregarse validacion de que ya se ingreso una zona geografica
+                            tarifa_1 = tarifa_1 + 20000
+                        elif zona_geo != "circuito chico" or "cerro catedral" or "ruta 40":
+                            print("Ingrese una zona válida")
+                    #Pregunta si es temporada alta y aplica tarifas
+                    temp_alta = input("Es para temporada alta? (si-no): ").lower()
+                    if temp_alta == "si":
+                        tarifa_1 = tarifa_1 + 20000
+                    
+                    tarifa_1 = tarifa_1 + 20000 #Seguro especial de Bariloche
+                    
+                    return tarifa_1, modelo_veh, patente_veh
+                tarifa_1, modelo_veh, patente_veh = mod_bariloche()
+                
+                tarifa = tarifa + tarifa_1
+            else:
+                #Registra el modelo y patente del vehiculo
+                modelo_veh = input("Ingrese el modelo del vehiculo: ")
+                patente_veh = input("Ingrese la patente del vehiculo: ")
+            
+            def modTarifa_por_tiempo():
+                tarifa_2 = 0
+                #Pregunta el tiempo de alquiler del vehiculo
+                timepo_alquiler = input("Ingrese la duracion del alquiler (diaria-fin de semana-semana-mes o superior): ").lower()
+                if timepo_alquiler == "diaria":
+                    tarifa_2 = tarifa_2 + 20000
+                elif timepo_alquiler == "fin de semana":
+                    tarifa_2 = tarifa_2 + 20000
+                elif timepo_alquiler == "semana":
+                    tarifa_2 = tarifa_2 + 20000
+                elif timepo_alquiler == "mes superior":
+                    tarifa_2 = tarifa_2 + 20000
+                
+                return tarifa_2
+            tarifa_2 = modTarifa_por_tiempo()
+            tarifa = tarifa + tarifa_2
+            
+            tarifa = tarifa * desc_vip
+            
+            print(f"La tarifa final es de ${tarifa}")
+            pago = float(input("Ingrese el monto a pagar: "))
+            while pago > tarifa:
+                print(f"El pago no puede ser mayor que la tarifa de ${tarifa}")
+                pago = float(input("Ingrese el monto a pagar: "))
+            
+            comprobante = f"{nombre} {apellido}\n {edad} años\n dni {dni}\n celular {cel}\n domicilio {domicilio}\n foroma de pago en {forma_pago}\n hotel de referencia {hotel}\n tarifa a pagar {tarifa}\n empresa {empresa}"
+            print(comprobante)
+            
+        #La licencia esta vencida
+        elif venc_lic < año_actual:
+            print("El solicitante on cuenta con una licencia habilitante válida")
+    #El solicitante es menor de 25 años
+    elif edad < 25:
+        print("El solicitante no cuenta con la edad minima requerida")
+        
+        
+elif veh_disp == "no":
+    print("No hay vehiculos disponibles")
