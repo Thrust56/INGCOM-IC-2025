@@ -7,13 +7,13 @@ año_actual = int(input("\nIngrese el año actual: "))
 tarifa = 20000 #Seguro inicial
 #Función de Toma de datos del cliente
 def datos_cliente():
-    edad = int(input("\nIngrese su edad: "))
+    edad = input("\nIngrese su edad: ")
     nombre = input("\nIngrese su nombre: ")
     apellido = input("\nIngrese su apellido: ")
-    dni = int(input("\nIngrese su DNI o numero de pasaporte: "))
+    dni = input("\nIngrese su DNI o numero de pasaporte: ")
     domicilio = input("\nIngrese su domicilio: ")
     empresa = input("\nIngrese la empresa en la que trabaja: ")
-    cel = int(input("\nIngrese su número de telefono: "))
+    cel = input("\nIngrese su número de telefono: ")
     venc_lic = int(input("\nIngrese la fecha de vencimiento de su licencia de conducir: "))
     #Pregunta si es turista y pide un hotel de referencia
     turista = input("\nEs usted turista? (si-no): ").lower()
@@ -83,7 +83,7 @@ def modTarifa_por_tiempo():
 
 
 #Pregunta si hay vehiculos disponibles
-veh_disp = input("Hay vehiculo disponible? (si-no): ").lower()
+veh_disp = input("\nHay vehiculo disponible? (si-no): ").lower()
 if veh_disp != "si":
     print("\nNo hay vehiculos disponibles")
     quit()
