@@ -1,7 +1,11 @@
+#Trabajo Práctico final
+#Intorducción a la Ingenieria en Computación, Comisión 1
+#Tomas Bizzarri, Federico García
+
 #Declaracion de variables
 año_actual = int(input("\nIngrese el año actual: "))
 tarifa = 20000 #Seguro inicial
-#Toma los datos del cliente
+#Función de Toma de datos del cliente
 def datos_cliente():
     edad = int(input("\nIngrese su edad: "))
     nombre = input("\nIngrese su nombre: ")
@@ -28,7 +32,7 @@ def datos_cliente():
 
 
 
-#Calcula tarifas para Bariloche
+#Función de Calculo de tarifas para Bariloche
 def mod_bariloche():
     tarifa_1 = 0
     #Agrega tarifas para vehiculos 4x4 y equipo de nieve
@@ -46,7 +50,7 @@ def mod_bariloche():
     while zona_geo != "s":
         zona_geo = input("\nIngrese una de las siguientes zonas:\nCircuito Chico\nCerro Catedral\nRuta 40\nO ingrese 'S' para salir: ").lower()
         if zona_geo == "circuito chico":
-            tarifa =+ 20000
+            tarifa_1 =+ 20000
         elif zona_geo == "cerro catedral":
             tarifa_1 = tarifa_1 + 20000
         elif zona_geo == "ruta 40": #Podria agregarse validacion de que ya se ingreso una zona geografica
@@ -62,7 +66,7 @@ def mod_bariloche():
     
     return tarifa_1, modelo_veh, patente_veh
 
-
+#Función de modificación de tarifa por timepo de estadia
 def modTarifa_por_tiempo():
     tarifa_2 = 0
     #Pregunta el tiempo de alquiler del vehiculo
@@ -73,7 +77,7 @@ def modTarifa_por_tiempo():
         tarifa_2 = tarifa_2 + 20000
     elif timepo_alquiler == "semana":
         tarifa_2 = tarifa_2 + 20000
-    elif timepo_alquiler == "mes superior":
+    elif timepo_alquiler == "mes o superior":
         tarifa_2 = tarifa_2 + 20000
     return tarifa_2
 
