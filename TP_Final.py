@@ -46,17 +46,19 @@ def mod_bariloche():
     modelo_veh = input("\nIngrese el modelo del vehiculo: ")
     patente_veh = input("\nIngrese la patente del vehiculo: ")
     #Pregunta si va a andar por estas zonas geograficas y aplica tarifas
-    zona_geo = "a"
-    while zona_geo != "s":
-        zona_geo = input("\nIngrese una de las siguientes zonas:\nCircuito Chico\nCerro Catedral\nRuta 40\nO ingrese 'S' para salir: ").lower()
+    zona_geo = input("\nIngrese una de las siguientes zonas:\nCircuito Chico\nCerro Catedral\nRuta 40\nO ingrese 'S' para salir: ").lower()
+    while True:
         if zona_geo == "circuito chico":
             tarifa_1 =+ 20000
+            break
         elif zona_geo == "cerro catedral":
             tarifa_1 = tarifa_1 + 20000
-        elif zona_geo == "ruta 40": #Podria agregarse validacion de que ya se ingreso una zona geografica
+            break
+        elif zona_geo == "ruta 40":
             tarifa_1 = tarifa_1 + 20000
+            break
         elif zona_geo != "circuito chico" or "cerro catedral" or "ruta 40":
-            print("\nIngrese una zona válida")
+            zona_geo = input("\nIngrese una de las siguientes zonas:\nCircuito Chico\nCerro Catedral\nRuta 40\nO ingrese 'S' para salir: ").lower()
     #Pregunta si es temporada alta y aplica tarifas
     temp_alta = input("\nEs para temporada alta? (si-no): ").lower()
     if temp_alta == "si":
@@ -122,9 +124,9 @@ tarifa += tarifa_2
 #Aplica descuento vip
 tarifa_final = tarifa * (1 - desc_vip)
 
-print(f"\nLa tarifa final es de ${tarifa}")
+print(f"\nLa tarifa final es de ${tarifa_final}")
 pago = float(input("\nIngrese el monto a pagar: "))
-while pago > tarifa:
+while pago > tarifa_final:
     print(f"\nEl pago no puede ser mayor que la tarifa de ${tarifa_final}")
     pago = float(input("\nIngrese el monto a pagar: "))
 
