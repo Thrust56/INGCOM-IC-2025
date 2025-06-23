@@ -7,7 +7,7 @@ año_actual = int(input("\nIngrese el año actual: "))
 tarifa = 20000 #Seguro inicial
 #Función de Toma de datos del cliente
 def datos_cliente():
-    edad = input("\nIngrese su edad: ")
+    edad = int(input("\nIngrese su edad: "))
     nombre = input("\nIngrese su nombre: ")
     apellido = input("\nIngrese su apellido: ")
     dni = input("\nIngrese su DNI o numero de pasaporte: ")
