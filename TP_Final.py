@@ -71,14 +71,21 @@ def modTarifa_por_tiempo():
     tarifa_2 = 0
     #Pregunta el tiempo de alquiler del vehiculo
     timepo_alquiler = input("\nIngrese la duracion del alquiler (diaria-fin de semana-semana-mes o superior): ").lower()
-    if timepo_alquiler == "diaria":
-        tarifa_2 = tarifa_2 + 20000
-    elif timepo_alquiler == "fin de semana":
-        tarifa_2 = tarifa_2 + 20000
-    elif timepo_alquiler == "semana":
-        tarifa_2 = tarifa_2 + 20000
-    elif timepo_alquiler == "mes o superior":
-        tarifa_2 = tarifa_2 + 20000
+    while True:
+        if timepo_alquiler == "diaria":
+            tarifa_2 = tarifa_2 + 20000
+            break
+        elif timepo_alquiler == "fin de semana":
+            tarifa_2 = tarifa_2 + 20000
+            break
+        elif timepo_alquiler == "semana":
+            tarifa_2 = tarifa_2 + 20000
+            break
+        elif timepo_alquiler == "mes o superior":
+            tarifa_2 = tarifa_2 + 20000
+            break
+        elif timepo_alquiler != "diaria" or "fin de semana" or "semana" or "mes o superior":
+            timepo_alquiler = input("\nIngrese la duracion del alquiler (diaria-fin de semana-semana-mes o superior): ").lower()
     return tarifa_2
 
 
